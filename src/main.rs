@@ -1,25 +1,18 @@
-use actix_web::{web, App, HttpResponse, HttpServer, Responder};
-use std::env;
+use actix_web::{web, App, HttpRequest, HttpServer, Responder};
 
-
-async fn index() -> impl Responder {
-    HttpResponse::Ok().body("Hello world!")
+async fn greet(req: HttpRequest) -> impl Responder {
+    let name = req.match_info().get("name").unwrap_or("World");
+    format!("Hello {}!", &name)
 }
 
-async fn index2() -> impl Responder {
-    HttpResponse::Ok().body("Hello world again!")
-}
-
-#[tokio::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    let HOST = env::var("HOST").expect("Host not set");
-    let PORT = env::var("PORT").expect("Port not set");
     HttpServer::new(|| {
         App::new()
-            .route("/", web::get().to(index))
-            .route("/again", web::get().to(index2))
+            .route("/", web::get().to(greet))
+            .route("/{name}", web::get().to(greet))
     })
-    .bind(format!("{}:{}", HOST, PORT))?
+    .bind("127.0.0.1:8080")?
     .run()
     .await
 }

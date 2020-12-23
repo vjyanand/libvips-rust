@@ -1,4 +1,4 @@
-FROM rust:1.46-alpine3.12
+FROM rust:1.48-alpine3.12
 
 ENV VIPS_VERSION=8.10.1
 
