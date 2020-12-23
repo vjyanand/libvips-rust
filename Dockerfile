@@ -1,5 +1,7 @@
 FROM vjyanand/libvips:latest
 
+RUN git clone https://github.com/vjyanand/libvips-rust
+
 WORKDIR /usr/src/dali
 
 COPY . .
