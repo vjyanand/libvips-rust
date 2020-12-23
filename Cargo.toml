@@ -1,5 +1,5 @@
 [package]
-name = "quic-quinn"
+name = "rust-vips"
 version = "0.1.0"
 authors = ["iavian"]
 edition = "2018"
@@ -7,10 +7,6 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-futures = { version = "0.3.*" }
-libvips = "1.4.0"
 actix-web = "3.3.2"
 num_cpus = "1.13.0"
-
-[build-dependencies]
-bindgen = "0.53.1"
+tokio = { version = "0.3.6", features = ["full"] }
