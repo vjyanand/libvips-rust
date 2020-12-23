@@ -2,6 +2,8 @@ FROM alpine:3.12
 
 ENV VIPS_VERSION=8.10.1
 
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain nightly    
+
 RUN apk add --update --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main --virtual .build-deps \
             build-base \
             pkgconfig \
@@ -32,7 +34,5 @@ RUN apk add --update --no-cache --repository=http://dl-cdn.alpinelinux.org/alpin
     apk add --update --no-cache libimagequant --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community libheif=1.6.2-r1 && \
     apk add --update --no-cache libimagequant --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main libde265=1.0.4-r0 && \
     export GI_TYPELIB_PATH=/usr/local/lib/girepository-1.0
-
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain nightly    
 
 CMD /usr/local/bin/vips
