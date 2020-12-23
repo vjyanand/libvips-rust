@@ -33,4 +33,6 @@ RUN apk add --update --no-cache --repository=http://dl-cdn.alpinelinux.org/alpin
     apk add --update --no-cache libimagequant --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main libde265=1.0.4-r0 && \
     export GI_TYPELIB_PATH=/usr/local/lib/girepository-1.0
 
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain nightly    
+
 CMD /usr/local/bin/vips
