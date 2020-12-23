@@ -8,6 +8,10 @@ RUN pwd
 
 WORKDIR /usr/src/dali
 
+RUN pwd
+
+RUN ls
+
 cp -r libvips-rust .
 
 RUN RUSTFLAGS="-C target-feature=-crt-static $(pkg-config vips --libs)" cargo install --path .
