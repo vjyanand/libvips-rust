@@ -8,7 +8,9 @@ edition = "2018"
 
 [dependencies]
 futures = { version = "0.3.*" }
-tokio = {version = "0.2.*", features = ["full"] }
+libvips = "1.4.0"
+actix-web = "3.3.2"
+num_cpus = "1.13.0"
 
 [build-dependencies]
 bindgen = "0.53.1"

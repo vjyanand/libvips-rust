@@ -1,31 +1,18 @@
-use a2::{
-   Client, CollapseId, Endpoint, NotificationBuilder, NotificationOptions,
-   PlainNotificationBuilder, Priority,
-};
-use std::fs::File;
-
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-   let mut builder = PlainNotificationBuilder::new("Yahoo!k112");
-   builder.set_category("break");
-   builder.set_sound("g.caf");
-
-   let options = NotificationOptions {
-      apns_topic: Some("com.iavian.breakingnews"),
-      apns_collapse_id: Some(CollapseId { value: "break1" }),
-      apns_id: Some("3B381E13-52C3-40EF-AE84-9DC0EA350507"),
-      apns_expiration: Some(420),
-      apns_priority: Some(Priority::High),
-   };
-   let payload = builder.build(
-      "9431d3a5a255f4e422058975d29c7c82cec0a9b39f6df4ae09abe710f458722b",
-      options,
-   );
-   let mut file = File::open("/Users/iavian/Desktop/quic-quinn/key.p8").expect("Poda go");
-
-   let client = Client::token(&mut file, "9WTD8HKTV3", "JX83D66C47", Endpoint::Production).unwrap();
-   
-   let response = client.send(payload).await?;
-   println!("Sent: {:?}", response);
-   Ok(())
+use libvips::VipsApp;
+///Users/iavian/Desktop/cnews/backend/image-resize/node_modules/sharp/vendor/8.10.0
+//--libdir=DIR            object code libraries [EPREFIX/lib]
+//  --includedir=DIR
+fn main() {
+   let cpus = num_cpus::get();
+   let mut available_threads = cpus;
+   if available_threads < 2 {
+      available_threads = 2;
+   }
+   let vips_threads = available_threads / 2;
+   let name = "dali";
+   let app = VipsApp::new(name, false).expect("Cannot initialize libvips");
+   app.concurrency_set(vips_threads as i32);
+   app.cache_set_max(0);
+   app.cache_set_max_mem(0);
+   println!("Hello, world! ,{}", cpus);
 }
