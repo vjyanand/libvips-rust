@@ -1,3 +1,3 @@
-FROM libvips
+FROM web
 
 RUN cargo build
