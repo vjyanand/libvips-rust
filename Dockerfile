@@ -40,9 +40,3 @@ WORKDIR /
 RUN rm -rf vips
 
 RUN rm -f vips-${VIPS_VERSION}.tar.gz
-
-WORKDIR /usr/src/dali
-
-COPY . .
-
-RUN RUSTFLAGS="-C target-feature=-crt-static $(pkg-config vips --libs)" cargo install --path .
